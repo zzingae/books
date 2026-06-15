@@ -11,6 +11,26 @@ window.MathJax = {
 };
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\(', '\)']],
+    displayMath: [['\[', '\]']],
+    processEscapes: true
+  },
+  chtml: {
+    displayAlign: 'left',
+    displayIndent: '0em'
+  }
+};
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
 <style>
 body {
   max-width: 820px;
@@ -27,8 +47,26 @@ body {
   padding-bottom: 48px;
 }
 
-h1, h2, h3 {
-  line-height: 1.3;
+.math-line {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  margin: 0.75em 0;
+  padding: 0.25em 0;
+  text-align: left;
+}
+
+.math-line mjx-container {
+  min-width: max-content;
+}
+
+mjx-container[display="true"] {
+  display: block !important;
+  text-align: left !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  padding: 0.25em 0;
 }
 
 figure {
@@ -42,285 +80,310 @@ figcaption {
   font-size: 0.9em;
 }
 
-.equation,
-.math-display {
-  overflow-x: auto;
-  overflow-y: hidden;
-  max-width: 100%;
-  white-space: nowrap;
-  margin: 1em 0;
+table {
+  border-collapse: collapse;
+  width: 100%;
 }
 
-mjx-container[display="true"] {
-  display: block !important;
-  overflow-x: auto;
-  overflow-y: hidden;
-  max-width: 100%;
-  padding: 0.5em 0;
+th, td {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
 }
 
-mjx-container[display="true"] > * {
-  min-width: max-content;
+pre {
+  overflow-x: auto;
 }
 </style>
 </head>
 <body>
 <section class="pdf-page" data-source="Gardiner-051.pdf">
-<p>[2.4] also uses the term <em>correlation functions</em>, a term which we shall reserve for cumulants which involve more than one \( X_i \). For, if the \( X \) are all independent, the factorisation property (2.6.6) implies that \( \Phi(s) \) (the cumulant generating function) is a sum of \( n \) terms, each of which is a function of only one \( s_i \) and hence the coefficient of mixed terms, i.e., the <em>correlation functions</em> (in our terminology) are all zero and the converse is also true. Thus, the magnitude of the correlation functions is a measure of the degree of correlation.</p>
+<p>[2.4] also uses the term <em>correlation functions</em>, a term which we shall reserve for cumulants which involve more than one \( X_r \). For, if the \( X \) are all independent, the factorisation property (2.6.6) implies that \( \Phi(s) \) (the cumulant generating function) is a sum of \( n \) terms, each of which is a function of only one \( s_i \) and hence the coefficient of mixed terms, i.e., the <em>correlation functions</em> (in our terminology) are all zero and the converse is also true. Thus, the magnitude of the correlation functions is a measure of the degree of correlation.</p>
 
 <p>The cumulants and correlation functions can be evaluated in terms of moments by expanding the characteristic function as a power series:</p>
 
-<div class="math-display">
+<div class="math-line">
 \[
-\phi(s) = \sum_{r=1}^\infty \frac{1}{r!} \sum_{m_i} \langle X_1^{m_1} X_2^{m_2} \ldots X_n^{m_n} \rangle \frac{r!}{m_1! m_2! \ldots m_n!} \delta \left(r, \sum_{i=1}^n m_i \right) s_1^{m_1} s_2^{m_2} \ldots s_n^{m_n}, \quad (2.7.3)
+\phi(s) = \sum_{r=1}^{\infty}\frac{1}{r!} \sum_{\{m\}} \langle X_1^{m_1} X_2^{m_2} \ldots X_n^{m_n} \rangle \frac{r!}{m_1!m_2! \ldots m_n!} \, \delta \left(r, \sum_{i=1}^n m_i \right) s_1^{m_1}s_2^{m_2} \ldots s_n^{m_n},
 \]
 </div>
+<p>
+(2.7.3)
+</p>
 
 <p>expanding the logarithm in a power series, and comparing it with (2.7.2) for \( \Phi(s) \) No <em>simple</em> formula can be given, but the first few cumulants can be exhibited: we find</p>
 
-<div class="math-display">
+<div class="math-line">
 \[
-\langle\langle X_l \rangle\rangle = \langle X_l \rangle \tag{2.7.4}
+\langle\langle X_i \rangle\rangle = \langle X_i \rangle
+\]
+</div>
+<p>
+(2.7.4)
+</p>
+
+<div class="math-line">
+\[
+\langle\langle X_i X_j \rangle\rangle = \langle X_i X_j \rangle - \langle X_i \rangle \langle X_j \rangle
+\]
+</div>
+<p>
+(2.7.5)
+</p>
+
+<div class="math-line">
+\[
+\langle\langle X_i X_j X_k \rangle\rangle = \langle X_i X_j X_k \rangle - \langle X_i X_j \rangle \langle X_k \rangle - \langle X_i \rangle \langle X_j X_k \rangle
 \]
 </div>
 
-<div class="math-display">
+<div class="math-line">
 \[
-\langle\langle X_i X_j \rangle\rangle = \langle X_i X_j \rangle - \langle X_i \rangle \langle X_j \rangle \tag{2.7.5}
+\qquad - \langle X_i X_k \rangle \langle X_j \rangle + 2 \langle X_i \rangle \langle X_j \rangle \langle X_k \rangle
 \]
 </div>
+<p>
+(2.7.6)
+</p>
 
-<div class="math-display">
-\[
-\begin{align*}
-\langle\langle X_i X_j X_k \rangle\rangle = \ & \langle X_i X_j X_k \rangle - \langle X_i X_j \rangle \langle X_k \rangle - \langle X_i X_k \rangle \langle X_j \rangle \\
-& - \langle X_j X_k \rangle \langle X_i \rangle + 2 \langle X_i \rangle \langle X_j \rangle \langle X_k \rangle \tag{2.7.6}
-\end{align*}
-\]
-</div>
-
-<p>(here, all formulae are valid for any number of equal \( i, j, k, l \)). An explicit general formula can be given as follows. Suppose we wish to calculate the cumulant \( \langle\langle X_1 X_2 X_3 \ldots X_n \rangle\rangle \). The procedure is the following:</p>
+<p>(here, all formulae are valid for any number of equal \( i,j,k,l \)). An explicit general formula can be given as follows. Suppose we wish to calculate the cumulant \( \langle\langle X_1 X_2 X_3 \ldots X_n \rangle\rangle \). The procedure is the following:</p>
 
 <ol>
-<li>write a sequence of \( n \) dots ...... ;</li>
-<li>divide into \( p + 1 \) subsets by inserting angle brackets
-  <blockquote>
-    \( \langle \ldots \rangle \langle \ldots \rangle \ldots \langle \ldots \rangle \) ;
-  </blockquote>
-</li>
-<li>distribute the symbols \( X_1 \ldots X_n \) in place of the dots in such a way that all <em>different</em> expressions of this kind occur, e.g.,
-  <blockquote>
-    \( \langle X_1 \rangle \langle X_2 X_3 \rangle = \langle X_1 \rangle \langle X_3 X_2 \rangle \neq \langle X_3 \rangle \langle X_1 X_2 \rangle \) ;
-  </blockquote>
-</li>
-<li>take the sum of all such terms for a given \( p \). Call this \( C_p(X_1, X_2, \ldots, X_n) \);</li>
-<li>
-  <div class="math-display">
-  \[
-  \langle \langle X_1 \ X_2 \ \ldots X_n \rangle \rangle = \sum_{p=0}^{n-1} (-1)^p p! C_p(X_1, X_2, \ldots, X_n). \tag{2.7.7}
-  \]
-  </div>
-</li>
+  <li>write a sequence of <i>n</i> dots ...... ;</li>
+  <li>divide into <i>p</i> + 1 subsets by inserting angle brackets</li>
+</ol>
+
+<p>\(\langle \ldots \rangle \langle \ldots \rangle \ldots \langle \ldots \rangle\) ;</p>
+
+<ol start="3">
+  <li>distribute the symbols \( X_1 \ldots X_n \) in place of the dots in such a way that all <em>different</em> expressions of this kind occur, e.g.,</li>
+</ol>
+
+<p>\(\langle X_1 \rangle \langle X_2 X_3 \rangle = \langle X_1 \rangle \langle X_3 X_2 \rangle \neq \langle X_3 \rangle \langle X_1 X_2 \rangle\) ;</p>
+
+<ol start="4">
+  <li>take the sum of all such terms for a given \( p \). Call this \( C_p(X_1, X_2, \ldots, X_n) \);</li>
+  <li>
+    <div class="math-line">
+    \[
+    \langle\langle X_1 X_2 \ldots X_n \rangle\rangle = \sum_{p=0}^{n-1} (-1)^p p! C_p(X_1, X_2, \ldots, X_n) .
+    \]
+    </div>
+    (2.7.7)
+  </li>
 </ol>
 
 <p>A derivation of this formula was given by Meeron [2.6]. The particular procedure is due to <em>van Kampen</em> [2.7].</p>
 
 <ol start="6">
-<li><em>Cumulants in which there is one or more repeated element</em>, e.g., \( \langle\langle X_1^2 X_3 X_2 \rangle\rangle \): simply evaluate \( \langle\langle X_1 X_2 X_3 X_4 \rangle\rangle \) and set \( X_4 = X_1 \) in the resulting expression.
-</li>
+  <li><em>Cumulants in which there is one or more repeated element</em>, e.g., \( \langle\langle X_1^2 X_3 X_2 \rangle\rangle \): simply evaluate \( \langle\langle X_1 X_2 X_3 X_4 \rangle\rangle \) and set \( X_4 = X_1 \) in the resulting expression.</li>
 </ol>
 </section>
 
 <section class="pdf-page" data-source="Gardiner-052.pdf">
-<h2>2.7.1 Example: Cumulant of Order 4: \(\langle \! \langle X_1 X_2 X_3 X_4 \rangle \! \rangle \)</h2>
+<section>
+  <h3>2.7.1 <b>Example: Cumulant of Order 4: \(\langle\langle X_1 X_2 X_3 X_4 \rangle\rangle\)</b></h3>
+  <p>
+    a) \(p = 0\)
+  </p>
+  <p>
+    only term is \(\langle X_1 X_2 X_3 X_4 \rangle \equiv C_0(X_1 X_2 X_3 X_4)\).
+  </p>
+  <p>
+    b) \(p = 1\) <br>
+    partition \(\langle \cdot \rangle \langle \cdots \rangle\) <br>
+    Term \(\{\langle X_1 \rangle \langle X_2 X_3 X_4 \rangle + \langle X_2 \rangle \langle X_3 X_4 X_1 \rangle + \langle X_3 \rangle \langle X_4 X_1 X_2 \rangle\)
+    <br> \(+ \langle X_4 \rangle \langle X_1 X_2 X_3 \rangle\} \equiv D_1\)
+    <br>
+    partition \(\langle \cdot \cdot \rangle \langle \cdot \cdot \rangle\) <br>
+    Term \(\langle X_1 X_2 \rangle \langle X_3 X_4 \rangle + \langle X_1 X_3 \rangle \langle X_2 X_4 \rangle + \langle X_1 X_4 \rangle \langle X_2 X_3 \rangle \equiv D_2\).
+  </p>
+  <p>
+    Hence,
+  </p>
+  <div class="math-line">
+  \[
+  D_1 + D_2 = C_1(X_1 X_2 X_3 X_4).
+  \]
+  </div>
+  <p>
+    c) \(p = 2\) <br>
+    partition \(\langle \cdot \rangle \langle \cdot \rangle \langle \cdot \cdot \rangle\) <br>
+    Term \(\langle X_1 \rangle \langle X_2 \rangle \langle X_3 X_4 \rangle + \langle X_1 \rangle \langle X_3 \rangle \langle X_2 X_4 \rangle + \langle X_1 \rangle \langle X_4 \rangle \langle X_2 X_3 \rangle\)
+    <br> \(+ \langle X_2 \rangle \langle X_1 \rangle \langle X_3 X_4 \rangle + \langle X_2 \rangle \langle X_4 \rangle \langle X_1 X_3 \rangle + \langle X_3 \rangle \langle X_4 \rangle \langle X_1 X_2 \rangle\)
+    <br>
+    \(= C_2(X_1 X_2 X_3 X_4)\).
+  </p>
+  <p>
+    d) \(p = 3\) <br>
+    partition \(\langle \cdot \rangle \langle \cdot \rangle \langle \cdot \rangle \langle \cdot \rangle\) <br>
+    Term \(\langle X_1 \rangle \langle X_2 \rangle \langle X_3 \rangle \langle X_4 \rangle = C_3(X_1 X_2 X_3 X_4)\).
+  </p>
+  <p>
+    Hence,
+  </p>
+  <div class="math-line">
+  \[
+  \langle\langle X_1 X_2 X_3 X_4 \rangle\rangle = C_0 - C_1 + 2C_2 - 6C_3 \tag{2.7.8}
+  \]
+  </div>
+</section>
 
-<p><b>a) \(p = 0\)</b></p>
-<p>only term is \( \langle X_1 X_2 X_3 X_4 \rangle \equiv C_0(X_1 X_2 X_3 X_4) \).</p>
-
-<p><b>b) \(p = 1\)</b></p>
-<p>partition \(\langle \cdot \rangle \langle \cdots \rangle\)</p>
-<p>
-Term \(\{ \langle X_1 \rangle \langle X_2 X_3 X_4 \rangle + \langle X_2 \rangle \langle X_3 X_4 X_1 \rangle + \langle X_3 \rangle \langle X_4 X_1 X_2 \rangle + \langle X_4 \rangle \langle X_1 X_2 X_3 \rangle \} \equiv D_1\)
-</p>
-<p>
-partition \(\langle \cdot \cdot \rangle \langle \cdot \cdot \rangle\)
-</p>
-<p>
-Term \(\langle X_1 X_2 \rangle \langle X_3 X_4 \rangle + \langle X_1 X_3 \rangle \langle X_2 X_4 \rangle + \langle X_1 X_4 \rangle \langle X_2 X_3 \rangle \equiv D_2\).
-</p>
-<p>
-Hence,
-</p>
-<div class="math-display">
-\[
-D_1 + D_2 = C_1(X_1 X_2 X_3 X_4).
-\]</div>
-
-<p><b>c) \(p = 2\)</b></p>
-<p>
-partition \(\langle \cdot \rangle \langle \cdot \cdot \rangle \langle \cdot \rangle\)
-</p>
-<p>
-Term \(\langle X_1 \rangle \langle X_2 \rangle \langle X_3 X_4 \rangle + \langle X_1 \rangle \langle X_3 \rangle \langle X_2 X_4 \rangle + \langle X_1 \rangle \langle X_4 \rangle \langle X_2 X_3 \rangle + \langle X_2 \rangle \langle X_3 \rangle \langle X_1 X_4 \rangle + \langle X_2 \rangle \langle X_4 \rangle \langle X_1 X_3 \rangle + \langle X_3 \rangle \langle X_4 \rangle \langle X_1 X_2 \rangle = C_2(X_1 X_2 X_3 X_4).
-</p>
-
-<p><b>d) \(p = 3\)</b></p>
-<p>
-partition \(\langle \cdot \rangle \langle \cdot \rangle \langle \cdot \rangle \langle \cdot \rangle\)
-</p>
-<p>
-Term \(\langle X_1 \rangle \langle X_2 \rangle \langle X_3 \rangle \langle X_4 \rangle = C_3(X_1 X_2 X_3 X_4)\).
-</p>
-
-<p>Hence,</p>
-<div class="math-display">
-\[
-\langle \! \langle X_1 X_2 X_3 X_4 \rangle \! \rangle = C_0 - C_1 + 2C_2 - 6C_3
-\]
-</div>
-<p style="text-align: right;">(2.7.8)</p>
-
-<h2>2.7.2 Significance of Cumulants</h2>
-
-<p>
-From (2.7.4, 5) we see that the first two cumulants are the means \(\langle X_i \rangle\) and covariances \(\langle X_i X_j \rangle\). Higher-order cumulants contain information of decreasing significance, unlike higher-order moments. We cannot set all <em>moments</em> higher than a certain order equal to zero since \(\langle X^n \rangle \geq \langle X^n \rangle^2\) and thus, all moments contain information about lower moments.
-</p>
-<p>
-For cumulants, however, we can consistently set
-</p>
-<div class="math-display">
-\[
-\langle \! \langle X \rangle \! \rangle = a
-\]
-</div>
-<div class="math-display">
-\[
-\langle \! \langle X^2 \rangle \! \rangle = \sigma^2
-\]
-</div>
-<div class="math-display">
-\[
-\langle \! \langle X^n \rangle \! \rangle = 0 \quad (n > 2),
-\]
-</div>
-<p></p>
+<section>
+  <h3>2.7.2 <b>Significance of Cumulants</b></h3>
+  <p>
+    From (2.7.4, 5) we see that the first two cumulants are the means \(\langle X_i \rangle\) and covariances \(\langle X_i X_j \rangle\). Higher-order cumulants contain information of decreasing significance, unlike higher-order moments. We cannot set all <i>moments</i> higher than a certain order equal to zero since \(\langle X^n \rangle \ge \langle X^n \rangle^2\) and thus, all moments contain information about lower moments.
+  </p>
+  <p>
+    For cumulants, however, we can consistently set
+  </p>
+  <div class="math-line">
+  \[
+  \langle\langle X \rangle\rangle = a
+  \]
+  </div>
+  <div class="math-line">
+  \[
+  \langle\langle X^2 \rangle\rangle = \sigma^2
+  \]
+  </div>
+  <div class="math-line">
+  \[
+  \langle\langle X^n \rangle\rangle = 0 \quad (n > 2),
+  \]
+  </div>
+</section>
 </section>
 
 <section class="pdf-page" data-source="Gardiner-053.pdf">
-<p>and we can easily deduce by using the inversion formula for the characteristic function that</p>
+and we can easily deduce by using the inversion formula for the characteristic function that
 
-<div class="math-display">
+<div class="math-line">
 \[
-p(x) = \frac{1}{\sigma \sqrt{2\pi}} \exp\left[ - (x - a)^2 / 2\sigma^2 \right],
+p(x) = \frac{1}{\sigma \sqrt{2\pi}} \exp[-(x - a)^2 / 2\sigma^2],
+\tag{2.7.9}
 \]
 </div>
-<p class="equation-number">(2.7.9)</p>
 
-<p>a Gaussian probability distribution. It does not, however, seem possible to give more than this intuitive justification. Indeed, the theorem of <em>Marcienkiewicz</em> [2.8,9] shows that the cumulant generating function cannot be a polynomial of degree greater than 2, that is, either all but the first 2 cumulants vanish or there are an infinite number of nonvanishing cumulants. The greatest significance of cumulants lies in the definition of the correlation functions of different variables in terms of them; this leads further to important approximation methods.</p>
+a Gaussian probability distribution. It does not, however, seem possible to give more than this intuitive justification. Indeed, the theorem of <em>Marcienkiewicz</em> [2.8,9] shows that the cumulant generating function cannot be a polynomial of degree greater than 2, that is, either all but the first 2 cumulants vanish or there are an infinite number of nonvanishing cumulants. The greatest significance of cumulants lies in the definition of the correlation functions of different variables in terms of them; this leads further to important approximation methods.
 
 <h2>2.8 Gaussian and Poissonian Probability Distributions</h2>
 
 <h3>2.8.1 The Gaussian Distribution</h3>
 
-<p>By far the most important probability distribution is the Gaussian, or normal distribution. Here we collect together the most important facts about it.</p>
-<p>If \( X \) is a vector of \( n \) Gaussian random variables, the corresponding multivariate probability density function can be written</p>
+<p>
+By far the most important probability distribution is the Gaussian, or normal distribution. Here we collect together the most important facts about it.
+</p>
+<p>
+If \( X \) is a vector of \( n \) Gaussian random variables, the corresponding multivariate probability density function can be written
+</p>
 
-<div class="math-display">
+<div class="math-line">
 \[
-p(x) = ([2\pi]^n \det(\sigma))^{-1/2} \exp\left[ -\frac{1}{2} (x - \bar{x})^T \sigma^{-1} (x - \bar{x}) \right]
+p(x) = [(2\pi)^n \det(\sigma)]^{-1/2} \exp\left[ -\frac{1}{2} (x - \bar{x})^T \sigma^{-1} (x - \bar{x}) \right]
+\tag{2.8.1}
 \]
 </div>
-<p class="equation-number">(2.8.1)</p>
 
-<p>so that</p>
+<p>
+so that
+</p>
 
-<div class="math-display">
+<div class="math-line">
 \[
 \langle X \rangle = \int dx\, x\, p(x) = \bar{x}
+\tag{2.8.2}
 \]
 </div>
-<p class="equation-number">(2.8.2)</p>
-
-<div class="math-display">
+<div class="math-line">
 \[
 \langle XX^T \rangle = \int dx\, xx^T p(x) = \bar{x} \bar{x}^T + \sigma
+\tag{2.8.3}
 \]
 </div>
-<p class="equation-number">(2.8.3)</p>
 
-<p>and the characteristic function is given by</p>
+<p>
+and the characteristic function is given by
+</p>
 
-<div class="math-display">
+<div class="math-line">
 \[
-\phi(s) = \langle \exp(i s^T X) \rangle = \exp(i s^T \bar{x} - \frac{1}{2} s^T \sigma s).
+\phi(s) = \langle \exp(i s^T X) \rangle = \exp(i s^T \bar{x} - \tfrac{1}{2} s^T \sigma s).
+\tag{2.8.4}
 \]
 </div>
-<p class="equation-number">(2.8.4)</p>
 
-<p>This particularly simple characteristic function implies that all cumulants of higher order than 2 vanish, and hence means that all moments of order higher than 2 are expressible in terms of those of order 1 and 2. The relationship (2.8.3) means that \( \sigma \) is the covariance matrix (as defined in Sect. 2.5.1), i.e., the matrix whose elements are the second-order correlation functions. Of course, \( \sigma \) is symmetric.</p>
-<p>The precise relationship between the higher moments and the covariance matrix \( \sigma \) can be written down straightforwardly by using the relationship between the moments and the characteristic function [Sect. 2.6 (iv)]. The formula is only simple if \( \bar{x} = 0 \), in which case the odd moments vanish and the even moments satisfy</p>
+<p>
+This particularly simple characteristic function implies that all cumulants of higher order than 2 vanish, and hence means that all moments of order higher than 2 are expressible in terms of those of order 1 and 2. The relationship (2.8.3) means that \( \sigma \) is the covariance matrix (as defined in Sect. 2.5.1), i.e., the matrix whose elements are the second-order correlation functions. Of course, \( \sigma \) is symmetric.
+</p>
+<p>
+The precise relationship between the higher moments and the covariance matrix \( \sigma \) can be written down straightforwardly by using the relationship between the moments and the characteristic function [Sect. 2.6 (iv)]. The formula is only simple if \( \bar{x} = 0 \), in which case the odd moments vanish and the even moments satisfy
+</p>
 
-<div class="math-display">
+<div class="math-line">
 \[
-\langle X_{i_1} X_{i_2} \ldots \rangle = \frac{(2N)!}{N! 2^N} \{ \sigma_{ij} \sigma_{kl} \sigma_{mn} \ldots \}_{sym},
+\langle X_i X_j X_k \ldots \rangle = \frac{(2N)!}{N!2^N} \{\sigma_{ij} \sigma_{kl} \sigma_{mn} \ldots\}_{sym},
+\tag{2.8.4}
 \]
 </div>
-<p class="equation-number">(2.8.4)</p>
 </section>
 
 <section class="pdf-page" data-source="Gardiner-054.pdf">
-<p>where the subscript "sym" means the symmetrised form of the product of \(\sigma\)'s, and \(2N\) is the order of the moment. For example,</p>
+where the subscript “sym” means the symmetrised form of the product of \(\sigma\)’s, and \(2N\) is the order of the moment. For example,
 
-<div class="math-display">
+<div class="math-line">
 \[
-\langle X_1 X_2 X_3 X_4 \rangle = \frac{4!}{4.2!} \left[ \frac{1}{3} \bigl( \sigma_{12}\sigma_{34} + \sigma_{41}\sigma_{23} + \sigma_{13}\sigma_{24} \bigr) \right]
+\langle X_1 X_2 X_3 X_4 \rangle = \frac{4!}{4.2!} \left[ \frac{1}{3} \left( \sigma_{12} \sigma_{34} + \sigma_{41} \sigma_{23} + \sigma_{13} \sigma_{24} \right) \right]
 \]
 </div>
-<div class="math-display">
+<div class="math-line">
 \[
-\hspace{8em} = \sigma_{12}\sigma_{34} + \sigma_{41}\sigma_{23} + \sigma_{13}\sigma_{24}
-\qquad\quad \text{(2.8.5)}
-\]
-</div>
-
-<div class="math-display">
-\[
-\langle X_i^4 \rangle = \frac{4!}{4.2!} \left[ \sigma_{ii}^2 \right] = 3 \sigma_{ii}^2. \qquad\qquad\qquad\qquad\quad\; \text{(2.8.6)}
+\hspace{4cm} = \sigma_{12} \sigma_{34} + \sigma_{41} \sigma_{23} + \sigma_{13} \sigma_{24}
+\hspace{8mm} \text{(2.8.5)}
 \]
 </div>
 
-<h3>2.8.2 &nbsp; <b>Central Limit Theorem</b></h3>
+<div class="math-line">
+\[
+\langle X_i^4 \rangle = \frac{4!}{4.2!} \left[ \sigma_{ii}^2 \right] = 3 \sigma_{ii}^2 .
+\hspace{8mm} \text{(2.8.6)}
+\]
+</div>
+
+<h3>2.8.2 <b>Central Limit Theorem</b></h3>
 
 <p>
 The Gaussian distribution is important for a variety of reasons. Many variables are in practice, empirically well approximated by Gaussians and the reason for this arises from the <i>central limit theorem</i>, which, roughly speaking, asserts that a random variable composed of the sum of many parts, each independent but arbitrarily distributed, is Gaussian. More precisely, let \(X_1, X_2, X_3, \ldots, X_n\) be independent random variables such that
 </p>
 
-<div class="math-display">
+<div class="math-line">
 \[
-\langle X_i \rangle = 0, \qquad \operatorname{var}\{ X_i \} = b_i^2
-\qquad\qquad\qquad\qquad\qquad\qquad\quad (2.8.7)
+\langle X_i \rangle = 0, \hspace{1cm} \mathrm{var}\{X_i\} = b_i^2
+\hspace{8mm} \text{(2.8.7)}
 \]
 </div>
 
 <p>
 and let the distribution function of \(X_i\) be \(p_i(x_i)\).
 </p>
+<p>
+Define
+</p>
 
-<p>Define</p>
-
-<div class="math-display">
+<div class="math-line">
 \[
-S_n = \sum_{i=1}^{n} X_i ,
-\qquad\qquad\qquad\qquad\qquad\qquad\qquad\;\quad (2.8.8)
+S_n = \sum_{i=1}^{n} X_i,
+\hspace{8mm} \text{(2.8.8)}
 \]
 </div>
 
-<p>and</p>
+<p>
+and
+</p>
 
-<div class="math-display">
+<div class="math-line">
 \[
-\sigma_n^2 = \operatorname{var} \{ S_n \} = \sum_{i=1}^n b_i^2 .
-\qquad\qquad\qquad\qquad\qquad\qquad\quad (2.8.9)
+\sigma_n^2 = \mathrm{var}\{S_n\} = \sum_{i=1}^{n} b_i^2 .
+\hspace{8mm} \text{(2.8.9)}
 \]
 </div>
 
@@ -328,148 +391,154 @@ S_n = \sum_{i=1}^{n} X_i ,
 We require further the fulfilment of the <i>Lindeberg condition</i>:
 </p>
 
-<div class="math-display">
+<div class="math-line">
 \[
-\lim_{n \to \infty} \left[ \frac{1}{\sigma_n^2} \sum_{i=1}^{n} \int_{|x| > \epsilon \sigma_n} dx\, x^2\, p_i(x) \right] = 0
-\qquad\qquad\qquad\qquad (2.8.10)
+\lim_{n \to \infty} \left[ \frac{1}{\sigma_n^2} \sum_{i=1}^{n} \int_{|x| > t \sigma_n} dx\; x^2\; p_i(x) \right] = 0
+\hspace{8mm} \text{(2.8.10)}
 \]
 </div>
 
 <p>
-for any fixed \( t > 0 \). Then, under these conditions, the distribution of the normalised sums \( S_n/\sigma_n \) tends to the Gaussian with zero mean and unit variance.
+for any fixed \(t > 0\). Then, under these conditions, the distribution of the normalised sums \(S_n/\sigma_n\) tends to the Gaussian with zero mean and unit variance.
 </p>
 
 <p>
-The proof of the theorem can be found in [2.1]. It is worthwhile commenting on the hypotheses, however. We first note that the summands \( X_i \) are required to be independent. This condition is not absolutely necessary; for example, choose
+The proof of the theorem can be found in [2.1]. It is worthwhile commenting on the hypotheses, however. We first note that the summands \(X_i\) are required to be independent. This condition is not absolutely necessary; for example, choose
 </p>
 
-<div class="math-display">
+<div class="math-line">
 \[
-X_i = \sum_{r=1}^{t'} Y_r
-\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad (2.8.11)
+X_i = \sum_{r=1}^{t'} Y_r,
+\hspace{8mm} \text{(2.8.11)}
 \]
 </div>
 </section>
 
 <section class="pdf-page" data-source="Gardiner-055.pdf">
-<p>where the \( Y_j \) are independent. Since the sum of the \( X \)'s can be rewritten as a sum of \( Y \)'s (with certain finite coefficients), the theorem is still true.</p>
+where the \( Y_j \) are independent. Since the sum of the \( X \)'s can be rewritten as a sum of \( Y \)'s (with certain finite coefficients), the theorem is still true.
 
-<p>Roughly speaking, as long as the correlation between \( X_i \) and \( X_j \) goes to zero sufficiently rapidly as \( |i-j| \rightarrow \infty \), a central limit theorem will be expected. The Lindeberg condition (2.8.10) is not an obviously understandable condition but is the weakest condition which expresses the requirement that the probability for \( |X_i| \) to be large is very small. For example, if all the \( b_i \) are infinite or greater than some constant \( C \), it is clear that \( \sigma_n^2 \) diverges as \( n \rightarrow \infty \). The sum of integrals in (2.8.10) is the sum of contributions to variances for all \( |X_i| > t\sigma_n \), and it is clear that as \( n \rightarrow \infty \), each contribution goes to zero. The Lindeberg condition requires the sum of all the contributions not to diverge as fast as \( \sigma_n^2 \). In practice, it is a rather weak requirement; satisfied if \( |X_i| < C \) for all \( X_i \), or if \( p_i(x) \) go to zero sufficiently rapidly as \( x \rightarrow \pm \infty \). An exception is</p>
+Roughly speaking, as long as the correlation between \( X_i \) and \( X_j \) goes to zero sufficiently rapidly as \( |i-j| \to \infty \), a central limit theorem will be expected. The Lindeberg condition (2.8.10) is not an obviously understandable condition but is the weakest condition which expresses the requirement that the probability for \( |X_t| \) to be large is very small. For example, if all the \( b_t \) are infinite or greater than some constant \( C \), it is clear that \( \sigma_n^2 \) diverges as \( n \to \infty \). The sum of integrals in (2.8.10) is the sum of contributions to variances for all \( |X_t| > t\sigma_n \), and it is clear that as \( n \to \infty \), each contribution goes to zero. The Lindeberg condition requires the sum of all the contributions not to diverge as fast as \( \sigma_n^2 \). In practice, it is a rather weak requirement; satisfied if \( |X_t| < C \) for all \( X_t \), or if \( p_t(x) \) go to zero sufficiently rapidly as \( x \to \pm\infty \). An exception is
 
-<div class="math-display">
+<div class="math-line">
 \[
-p_i(x) = a_i [\pi(x^2 + a_i^2)]^{-1} ;
+p_t(x) = a_t[\pi(x^2 + a_t^2)]^{-1} ;
 \tag{2.8.12}
 \]
 </div>
 
-<p>the <i>Cauchy, or Lorentzian</i> distribution. The variance of this distribution is infinite and, in fact, the sum of all the \( X_i \) has a distribution of the same form as (2.8.12) with \( a_i \) replaced by \( \sum_{i=1}^{n} a_i \). Obviously, the Lindeberg condition is not satisfied.</p>
+the Cauchy, or Lorentzian distribution. The variance of this distribution is infinite and, in fact, the sum of all the \( X_t \) has a distribution of the same form as (2.8.12) with \( a_t \) replaced by \( \sum\limits_{i=1}^n a_i \). Obviously, the Lindeberg condition is not satisfied.
 
-<p>A related condition, also known as the Lindeberg condition, will arise in Sect. 3.3.1. where we discuss the replacement of a discrete process by one with continuous steps.</p>
+A related condition, also known as the Lindeberg condition, will arise in Sect. 3.3.1. where we discuss the replacement of a discrete process by one with continuous steps.
 
-<h3>2.8.3 &nbsp; <b>The Poisson Distribution</b></h3>
+<h3>2.8.3 The Poisson Distribution</h3>
 
-<p>A distribution which plays a central role in the study of random variables which take on positive integer values is the Poisson distribution. If \( X \) is the relevant variable the Poisson distribution is defined by</p>
+A distribution which plays a central role in the study of random variables which take on positive integer values is the Poisson distribution. If \( X \) is the relevant variable the Poisson distribution is defined by
 
-<div class="math-display">
+<div class="math-line">
 \[
-P(X = x) \equiv P(x) = e^{-\alpha} \alpha^x / x!
+P(X = x) \equiv P(x) = e^{-\alpha} \alpha^x/x!
 \tag{2.8.13}
 \]
 </div>
 
-<p>and clearly, the <i>factorial moments</i>, defined by</p>
+and clearly, the <em>factorial moments</em>, defined by
 
-<div class="math-display">
+<div class="math-line">
 \[
 \langle X^r \rangle_f = \langle x(x-1)\ldots(x-r+1)\rangle ,
 \tag{2.8.14}
 \]
 </div>
 
-<p>are given by</p>
+are given by
 
-<div class="math-display">
+<div class="math-line">
 \[
 \langle X^r \rangle_f = \alpha^r ,
 \tag{2.8.15}
 \]
 </div>
 
-<p>For variables whose range is nonnegative integral, we can very naturally define the <i>generating function</i></p>
+For variables whose range is nonnegative integral, we can very naturally define the <em>generating function</em>
 
-<div class="math-display">
+<div class="math-line">
 \[
 G(s) = \sum_{x=0}^{\infty} s^x P(x) = \langle s^x \rangle
 \tag{2.8.16}
 \]
 </div>
 
-<p>which is related to the characteristic function by</p>
+which is related to the characteristic function by
 </section>
 
 <section class="pdf-page" data-source="Gardiner-056.pdf">
-<div class="math-display">
+<div class="math-line">
 \[
-G(s) = \varphi(-i \log s) .
+G(s) = \phi(-i \log s) .
 \]
 </div>
-<p style="text-align: right;">(2.8.17)</p>
+<div style="text-align: right;">(2.8.17)</div>
 
 <p>
 The generating function has the useful property that
 </p>
-<div class="math-display">
+
+<div class="math-line">
 \[
-\langle X^{r} \rangle_{f} = \left[ \left( \frac{\partial}{\partial s} \right)^r G(s) \right]_{s=1} .
+\langle X^r \rangle_f = \left[ \left( \frac{\partial}{\partial s} \right)^r G(s) \right]_{s=1} .
 \]
 </div>
-<p style="text-align: right;">(2.8.18)</p>
+<div style="text-align: right;">(2.8.18)</div>
 
 <p>
 For the Poisson distribution we have
 </p>
-<div class="math-display">
+
+<div class="math-line">
 \[
-G(s) = \sum_{x=0}^{\infty} \frac{e^{-\alpha} (\alpha s)^x}{x!} = \exp[\alpha(s - 1)] .
+G(s) = \sum_{x=0}^\infty \frac{e^{-\alpha} (\alpha s)^x}{x!} = \exp[\alpha(s-1)] .
 \]
 </div>
-<p style="text-align: right;">(2.8.19)</p>
+<div style="text-align: right;">(2.8.19)</div>
 
 <p>
 We may also define the factorial cumulant generating function \( g(s) \) by
 </p>
-<div class="math-display">
+
+<div class="math-line">
 \[
 g(s) = \log G(s)
 \]
 </div>
-<p style="text-align: right;">(2.8.20)</p>
+<div style="text-align: right;">(2.8.20)</div>
 
 <p>
-and the <em>factorial cumulants</em> \( \langle \langle X^{r} \rangle \rangle_{f} \) by
+and the <em>factorial cumulants</em> \( \langle\!\langle X^r \rangle\!\rangle_f \) by
 </p>
-<div class="math-display">
+
+<div class="math-line">
 \[
-g(s) = \sum_{r=1}^{\infty} \langle \langle X^{r} \rangle \rangle_{f} \frac{(s-1)^r}{r!} .
+g(s) = \sum_{r=1}^\infty \langle\!\langle X^r \rangle\!\rangle_f \frac{(s-1)^r}{r!} .
 \]
 </div>
 
 <p>
 We see that the Poisson distribution has all but the first factorial cumulant zero.
 </p>
+
 <p>
 The Poisson distribution arises naturally in very many contexts, for example, we have already met it in Sect.1.2.3 as the solution of a simple master equation. It plays a similar central role in the study of random variables which take on integer values to that occupied by the Gaussian distribution in the study of variables with a continuous range. However, the only simple multivariate generalisation of the Poisson is simply a product of Poissons, i.e., of the form
 </p>
-<div class="math-display">
+
+<div class="math-line">
 \[
-P(x_{1},\,x_{2},\,x_{3},~\ldots) = \prod_{i=1}^{n} \frac{e^{-\alpha_i}(\alpha_i)^{x_i}}{x_i!}.
+P(x_1, x_2, x_3, \ldots) = \prod_{i=1}^n \frac{e^{-\alpha_i} (\alpha_i)^{x_i}}{x_i!} .
 \]
 </div>
-<p style="text-align: right;">(2.8.21)</p>
+<div style="text-align: right;">(2.8.21)</div>
 
 <p>
-There is no logical concept of a correlated multipoissonian distribution, similar to that of a correlated multivariate Gaussian distribution.
+There is no logical concept of a correlated multipossionian distribution, similar to that of a correlated multivariate Gaussian distribution.
 </p>
 
 <h2>2.9 Limits of Sequences of Random Variables</h2>
@@ -477,15 +546,17 @@ There is no logical concept of a correlated multipoissonian distribution, simila
 <p>
 Much of computational work consists of determining <em>approximations</em> to random variables, in which the concept of a <em>limit of a sequence of random variables</em> naturally arises. However, there is no unique way of defining such a limit.
 </p>
+
 <p>
 For, suppose we have a probability space \( \Omega \), and a sequence of random variables \( X_n \) defined on \( \Omega \). Then by the limit of the sequence as \( n \to \infty \)
 </p>
-<div class="math-display">
+
+<div class="math-line">
 \[
 X = \lim_{n \to \infty} X_n ,
 \]
 </div>
-<p style="text-align: right;">(2.9.1)</p>
+<div style="text-align: right;">(2.9.1)</div>
 
 <p>
 we mean a random variable \( X \) which, in some sense, is approached by the sequence
@@ -493,13 +564,15 @@ we mean a random variable \( X \) which, in some sense, is approached by the seq
 </section>
 
 <section class="pdf-page" data-source="Gardiner-057.pdf">
-<h2>2.9.1 Almost Certain Limit</h2>
+<p>of random variables \( X_n \). The various possibilities arise when one considers that the probability space \( \Omega \) has elements \( \omega \) which have a probability density \( p(\omega) \). Then we can choose the following definitions.</p>
+
+<h3>2.9.1&nbsp;&nbsp;Almost Certain Limit</h3>
 
 <p>
-\( X_n \) converges <em>almost certainly</em> to \( X \) if, for all \( \omega \) except a set of probability zero
+\( X_n \) converges <b>almost certainly</b> to \( X \) if, for all \( \omega \) except a set of probability zero
 </p>
 
-<div class="math-display">
+<div class="math-line">
 \[
 \lim_{n \to \infty} X_n(\omega) = X(\omega).
 \tag{2.9.2}
@@ -510,22 +583,22 @@ we mean a random variable \( X \) which, in some sense, is approached by the seq
 Thus each realisation of \( X_n \) converges to \( X \) and we write
 </p>
 
-<div class="math-display">
+<div class="math-line">
 \[
-\mathrm{ac{-}lim}_{n \to \infty} X_n = X
+\underset{n \to \infty}{\operatorname{ac-lim}}\, X_n = X
 \tag{2.9.3}
 \]
 </div>
 
-<h2>2.9.2 Mean Square Limit (Limit in the Mean)</h2>
+<h3>2.9.2&nbsp;&nbsp;Mean Square Limit (Limit in the Mean)</h3>
 
 <p>
-Another possibility is to regard the \( X_n(\omega) \) as functions of \( \omega \), and look for the mean square deviation of \( X_n(\omega) \) from \( X(\omega) \). Thus, we say that \( X_n \) converges to \( X \) in the <em>mean square</em> if
+Another possibility is to regard the \( X_n(\omega) \) as functions of \( \omega \), and look for the mean square deviation of \( X_n(\omega) \) from \( X(\omega) \). Thus, we say that \( X_n \) converges to \( X \) in the <i>mean square</i> if
 </p>
 
-<div class="math-display">
+<div class="math-line">
 \[
-\lim_{n \to \infty} \int d\omega\; p(\omega)[X_n(\omega) - X(\omega)]^2 \equiv \lim_{n \to \infty} \langle (X_n - X)^2 \rangle = 0
+\lim_{n \to \infty} \int d\omega\, p(\omega)[X_n(\omega) - X(\omega)]^2 \equiv \lim_{n \to \infty} \langle (X_n - X)^2 \rangle = 0
 \tag{2.9.4}
 \]
 </div>
@@ -534,57 +607,52 @@ Another possibility is to regard the \( X_n(\omega) \) as functions of \( \omega
 This is the kind of limit which is well known in Hilbert space theory. We write
 </p>
 
-<div class="math-display">
+<div class="math-line">
 \[
-\mathrm{ms{-}lim}_{n \to \infty} X_n = X
+\underset{n \to \infty}{\operatorname{ms-lim}}\, X_n = X
 \tag{2.9.5}
 \]
 </div>
 
-<h2>2.9.3 Stochastic Limit, or Limit in Probability</h2>
+<h3>2.9.3&nbsp;&nbsp;Stochastic Limit, or Limit in Probability</h3>
 
 <p>
-We can consider the possibility that \( X_n(\omega) \) approaches \( X \) because the probability of deviation from \( X \) approaches zero: precisely, this means that if for any \( \varepsilon &gt; 0 \)
+We can consider the possibility that \( X_n(\omega) \) approaches \( X \) because the probability of deviation from \( X \) approaches zero: precisely, this means that if for any \( \varepsilon > 0 \)
 </p>
 
-<div class="math-display">
+<div class="math-line">
 \[
-\lim_{n \to \infty} P(\lvert X_n - X \rvert &gt; \varepsilon) = 0
+\lim_{n \to \infty} P(|X_n - X| > \varepsilon) = 0
 \tag{2.9.6}
 \]
 </div>
 
 <p>
-then the <em>stochastic limit</em> of \( X_n \) is \( X \).
+then the <i>stochastic limit</i> of \( X_n \) is \( X \).
 </p>
 <p>
-Note that the probability can be written as follows. Suppose \( \chi_{\varepsilon}(z) \) a function such that
+Note that the probability can be written as follows. Suppose \( \chi_\varepsilon(z) \) a function such that
 </p>
 
 <table>
   <tr>
-    <td>\(\chi_{\varepsilon}(z) = 1\)</td>
-    <td>\(\lvert z \rvert &gt; \varepsilon\)</td>
+    <td>\(\chi_\varepsilon(z) = 1\)</td>
+    <td>\(|z| > \varepsilon\)</td>
   </tr>
   <tr>
-    <td>&emsp;\(= 0\)</td>
-    <td>\(\lvert z \rvert \leq \varepsilon\)</td>
+    <td>\(= 0\)</td>
+    <td>\(|z| \leq \varepsilon\)</td>
   </tr>
 </table>
-
-<div class="math-display">
-\[
-\tag{2.9.7}
-\]
-</div>
+<p style="text-align:right;">(2.9.7)</p>
 
 <p>
 Then
 </p>
 
-<div class="math-display">
+<div class="math-line">
 \[
-P(\lvert X_n - X \rvert &gt; \varepsilon) = \int d\omega\; p(\omega) \chi_{\varepsilon}(\lvert X_n - X \rvert).
+P(|X_n - X| > \varepsilon) = \int d\omega\, p(\omega) \chi_\varepsilon(|X_n - X|).
 \tag{2.9.8}
 \]
 </div>
@@ -593,37 +661,38 @@ P(\lvert X_n - X \rvert &gt; \varepsilon) = \int d\omega\; p(\omega) \chi_{\vare
 <section class="pdf-page" data-source="Gardiner-058.pdf">
 <p>In this case, we write</p>
 
-<div class="math-display">
+<div class="math-line">
 \[
-\operatorname{st}\text{-}\lim_{n \rightarrow \infty} X_n = X
+\operatorname{st\mbox{-}lim}_{n \to \infty} X_n = X
+\qquad\qquad\qquad\qquad\qquad (2.9.9)
 \]
 </div>
-<p style="text-align: right;">(2.9.9)</p>
 
-<h3>2.9.4&nbsp;&nbsp;Limit in Distribution</h3>
-
-<p>An even weaker form of convergence occurs if, for any continuous bounded function \( f(x) \)</p>
-
-<div class="math-display">
-\[
-\lim_{n \rightarrow \infty} \langle f(X_n) \rangle = \langle f(X) \rangle.
-\]
-</div>
-<p style="text-align: right;">(2.9.10)</p>
+<h3>2.9.4 &nbsp;Limit in Distribution</h3>
 
 <p>
-In this case the convergence of the limit is said to be <em>in distribution</em>. In particular, using \(\exp(ixs)\) for \(f(x)\), we find that the characteristic functions approach each other, and hence the probability density of \(X_n\) approaches that of \(X\).
+An even weaker form of convergence occurs if, for any continuous bounded function \( f(x) \)
 </p>
 
-<h3>2.9.5&nbsp;&nbsp;Relationship Between Limits</h3>
+<div class="math-line">
+\[
+\lim_{n \to \infty} \langle f(X_n) \rangle = \langle f(X) \rangle . \qquad\qquad\qquad (2.9.10)
+\]
+</div>
+
+<p>
+In this case the convergence of the limit is said to be <i>in distribution</i>. In particular, using \(\exp(ixs)\) for \(f(x)\), we find that the characteristic functions approach each other, and hence the probability density of \( X_n \) approaches that of \( X \).
+</p>
+
+<h3>2.9.5 &nbsp;Relationship Between Limits</h3>
 
 <p>The following relations can be shown.</p>
 
-<ul>
-    <li>Almost certain convergence \(\Longrightarrow\) stochastic convergence.</li>
-    <li>Convergence in mean square \(\Longrightarrow\) stochastic convergence.</li>
-    <li>Stochastic convergence \(\Longrightarrow\) convergence in distribution.</li>
-</ul>
+<pre>
+Almost certain convergence   ⟹   stochastic convergence.
+Convergence in mean square  ⟹   stochastic convergence.
+Stochastic convergence      ⟹   convergence in distribution.
+</pre>
 
 <p>All of these limits have uses in applications.</p>
 </section>
@@ -631,19 +700,18 @@ In this case the convergence of the limit is said to be <em>in distribution</em>
 <section class="pdf-page" data-source="Gardiner-059.pdf">
 <h2>3. Markov Processes</h2>
 
-<h3>3.1 Stochastic Processes</h3>
+<h3>3.1&nbsp;&nbsp;Stochastic Processes</h3>
 
 <p>
-All of the examples given in Chap. 1 can be mathematically described as <i>stochastic processes</i> by which we mean, in a loose sense, systems which evolve probabilistically in time or more precisely, systems in which a certain time-dependent random variable \( X(t) \) exists. We can measure values <b>x<sub>1</sub></b>, <b>x<sub>2</sub></b>, <b>x<sub>3</sub></b>, ..., etc., of \( X(t) \) at times \( t_1, t_2, t_3, \ldots \) and we assume that a set of joint probability densities exists
+All of the examples given in Chap. 1 can be mathematically described as <em>stochastic processes</em> by which we mean, in a loose sense, systems which evolve probabilistically in time or more precisely, systems in which a certain time-dependent random variable \( X(t) \) exists. We can measure values \( \mathbf{x}_1, \mathbf{x}_2, \mathbf{x}_3, \ldots \), etc., of \( X(t) \) at times \( t_1, t_2, t_3, \ldots \) and we assume that a set of joint probability densities exists
 </p>
 
-<div class="math-display">
+<div class="math-line">
 \[
 p(\mathbf{x}_1, t_1; \mathbf{x}_2, t_2; \mathbf{x}_3, t_3; \ldots)
+\tag{3.1.1}
 \]
 </div>
-
-<p style="text-align:right">(3.1.1)</p>
 
 <p>
 which describe the system completely.
@@ -653,89 +721,92 @@ which describe the system completely.
 In terms of these joint probability density functions, one can also define conditional probability densities:
 </p>
 
-<div class="math-display">
+<div class="math-line">
 \[
-\begin{align*}
-p(\mathbf{x}_1, t_1; \mathbf{x}_2, t_2; \ldots | \mathbf{y}_1, \tau_1; \mathbf{y}_2, \tau_2; \ldots) 
-&= p(\mathbf{x}_1, t_1; \mathbf{x}_2, t_2; \ldots; \mathbf{y}_1, \tau_1; \mathbf{y}_2, \tau_2; \ldots)/p(\mathbf{y}_1, \tau_1; \mathbf{y}_2, \tau_2; \ldots)
-\end{align*}
+p(\mathbf{x}_1, t_1; \mathbf{x}_2, t_2; \ldots \mid \mathbf{y}_1, \tau_1; \mathbf{y}_2, \tau_2; \ldots)
 \]
 </div>
 
-<p style="text-align:right">(3.1.2)</p>
+<div class="math-line">
+\[
+= p(\mathbf{x}_1, t_1; \mathbf{x}_2, t_2; \ldots ; \mathbf{y}_1, \tau_1; \mathbf{y}_2, \tau_2; \ldots)/p(\mathbf{y}_1, \tau_1; \mathbf{y}_2, \tau_2; \ldots).
+\tag{3.1.2}
+\]
+</div>
 
 <p>
 These definitions are valid independently of the ordering of the times, although it is usual to consider only times which increase from right to left i.e.,
 </p>
 
-<div class="math-display">
+<div class="math-line">
 \[
-t_1 \geq t_2 \geq t_3 \geq \ldots > \tau_1 \geq \tau_2 \geq \ldots
+t_1 \geq t_2 \geq t_3 \geq \ldots \geq \tau_1 \geq \tau_2 \geq \ldots .
+\tag{3.1.3}
 \]
 </div>
-
-<p style="text-align:right">(3.1.3)</p>
 
 <p>
 The concept of an evolution equation leads us to consider the conditional probabilities as predictions of the future values of \( X(t) \) (i.e., \( \mathbf{x}_1, \mathbf{x}_2, \ldots \) at times \( t_1, t_2, \ldots \)), given the knowledge of the past (values \( \mathbf{y}_1, \mathbf{y}_2, \ldots \), at times \( \tau_1, \tau_2, \ldots \)).
 </p>
 
 <p>
-The concept of a general stochastic process is very loose. To define the process we need to know at least all possible joint probabilities of the kind in (3.1.1). If such knowledge does define the process, it is known as a <i>separable stochastic process</i>. All the processes considered in this book will be assumed to be separable.
+The concept of a general stochastic process is very loose. To define the process we need to know at least all possible joint probabilities of the kind in (3.1.1). If such knowledge does define the process, it is known as a <em>separable stochastic process</em>. All the processes considered in this book will be assumed to be separable.
 </p>
 
 <p>
 The most simple kind of stochastic process is that of complete independence:
 </p>
 
-<div class="math-display">
+<div class="math-line">
 \[
-p(\mathbf{x}_1, t_1; \mathbf{x}_2, t_2; \mathbf{x}_3, t_3; \ldots) = \prod_i p(\mathbf{x}_i, t_i)
+p(\mathbf{x}_1, t_1; \mathbf{x}_2, t_2; \mathbf{x}_3, t_3; \ldots) = \prod_{i} p(\mathbf{x}_i, t_i)
+\tag{3.1.4}
 \]
 </div>
 
-<p style="text-align:right">(3.1.4)</p>
-
 <p>
-which means that the value of \( X \) at time \( t \) is completely independent of its values in the past (or future). An even more special case occurs when the \( p(\mathbf{x}_i, t_i) \) are independent of \( t_i \), so that the same probability law governs the process at all times. We then have the <i>Bernoulli trials</i>, in which a probabilistic process is repeated at successive times.
+which means that the value of \( X \) at time \( t \) is completely independent of its values in the past (or future). An even more special case occurs when the \( p(\mathbf{x}_i, t_i) \) are independent of \( t_i \), so that the same probability law governs the process at all times. We then have the <em>Bernoulli trials</em>, in which a probabilistic process is repeated at successive times.
 </p>
 </section>
 
 <section class="pdf-page" data-source="Gardiner-060.pdf">
 <p>
-The next most simple idea is that of the <i>Markov process</i> in which knowledge o<br>
+The next most simple idea is that of the <em>Markov process</em> in which knowledge o<br>
 only the present determines the future.
 </p>
 
 <h2>3.2 Markov Process</h2>
 
 <p>
-The <i>Markov assumption</i> is formulated in terms of the conditional probabilities. We<br>
+The <em>Markov assumption</em> is formulated in terms of the conditional probabilities. Wo<br>
 require that if the times satisfy the ordering (3.1.3), the conditional probability i<br>
 determined entirely by the knowledge of the most recent condition, i.e.,
 </p>
 
-<div class="math-display">
+<div class="math-line">
 \[
-p(x_1, t_1; \, x_2, t_2; \, \ldots \mid y_1, \tau_1 ; y_2, \tau_2; \ldots )
-= p(x_1, t_1; x_2, t_2; \ldots \mid y_1, \tau_1).
+p(x_1, t_1;\ x_2, t_2;\ \ldots\ |y_1, \tau_1;\ y_2, \tau_2; \ldots)
+\]
+</div>
+<div class="math-line">
+\[
+= p(x_1, t_1; x_2, t_2; \ldots\ |y_1, \tau_1).
 \tag{3.2.1}
 \]
 </div>
 
 <p>
-This is simply a more precise statement of the assumptions made by Einstein,<br>
+This is simply a more precise statement of the assumptions made by Einstein<br>
 Smoluchowski and others. It is, even by itself, extremely powerful. For it mean<br>
 that we can define everything in terms of the simple conditional probabilitie<br>
-\( p(x_1, t_1 \mid y_1, \tau_1) \). For example, by definition of the conditional probability densit<br>
-\( p(x_1, t_1; x_2, t_2 \mid y_1, \tau_1) = p(x_1, t_1 \mid x_2, t_2; y_1, \tau_1) p(x_2, t_2 \mid y_1, \tau_1) \) and using the Marko<br>
+\( p(x_1, t_1|y_1, \tau_1) \). For example, by definition of the conditional probability densit<br>
+\( p(x_1, t_1;\ x_2, t_2|y_1, \tau_1) = p(x_1, t_1|x_2, t_2; y_1, \tau_1)p(x_2, t_2|y_1, \tau_1) \) and using the Marko<br>
 assumption (3.2.1), we find
 </p>
 
-<div class="math-display">
+<div class="math-line">
 \[
-p(x_1, t_1; x_2, t_2; y_1, \tau_1)
-= p(x_1, t_1 \mid x_2, t_2) p(x_2, t_2 \mid y_1, \tau_1)
+p(x_1, t_1; x_2, t_2; y_1, \tau_1) = p(x_1, t_1|x_2, t_2)p(x_2, t_2|y_1, \tau_1)
 \tag{3.2.2}
 \]
 </div>
@@ -745,16 +816,20 @@ and it is not difficult to see that an arbitrary joint probability can be expres
 ply as
 </p>
 
-<div class="math-display">
+<div class="math-line">
 \[
 p(x_1, t_1; x_2, t_2; x_3, t_3; \ldots x_n, t_n)
 \]
+</div>
+<div class="math-line">
 \[
-= p(x_1, t_1 \mid x_2, t_2) p(x_2, t_2 \mid x_3, t_3) p(x_3, t_3 \mid x_4, t_4) \ldots
-\]
-\[
-\ldots p(x_{n-1}, t_{n-1} \mid x_n, t_n) p(x_n, t_n)
+= p(x_1, t_1|x_2, t_2)p(x_2, t_2|x_3, t_3)p(x_3, t_3|x_4, t_4) \ldots
 \tag{3.2.3}
+\]
+</div>
+<div class="math-line">
+\[
+\ldots p(x_{n-1}, t_{n-1}|x_n, t_n)p(x_n, t_n)
 \]
 </div>
 
@@ -762,9 +837,9 @@ p(x_1, t_1; x_2, t_2; x_3, t_3; \ldots x_n, t_n)
 provided
 </p>
 
-<div class="math-display">
+<div class="math-line">
 \[
-t_1 \ge t_2 \ge t_3 \ge \ldots \ge t_{n - 1} \ge t_n .
+t_1 \geq t_2 \geq t_3 \geq \ldots \geq t_{n-1} \geq t_n.
 \tag{3.2.4}
 \]
 </div>
@@ -776,7 +851,7 @@ From Sect.2.3.3 we require that summing over all mutually exclusive events o<br>
 one kind in a joint probability eliminates that variable, i.e.,
 </p>
 
-<div class="math-display">
+<div class="math-line">
 \[
 \sum_B P(A \cap B \cap C \ldots) = P(A \cap C \ldots) ;
 \tag{3.2.5}
@@ -788,11 +863,14 @@ and when this is applied to stochastic processes, we get two deceptively simila<
 equations:
 </p>
 
-<div class="math-display">
+<div class="math-line">
 \[
-p(x_1, t_1)
-= \int dx_2 \; p(x_1, t_1 ; x_2, t_2)
-= \int dx_2 \; p(x_1, t_1 \mid x_2, t_2) p(x_2, t_2) .
+p(x_1, t_1) = \int dx_2\ p(x_1, t_1;\ x_2, t_2)
+\]
+</div>
+<div class="math-line">
+\[
+= \int dx_2\ p(x_1, t_1|x_2, t_2)p(x_2, t_2).
 \tag{3.2.6}
 \]
 </div>
